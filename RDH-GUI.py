@@ -1,4 +1,4 @@
-from tkinter import Tk, Button, Label, filedialog, Text, WORD, LabelFrame
+from tkinter import Tk, Button, Label, filedialog, Text, WORD, LabelFrame, ttk
 from PIL import Image, ImageTk
 import numpy as np
 from os.path import isfile
@@ -157,7 +157,9 @@ def display_decrypt_message(message):
     return
 
 app = Tk()
-app.title("RDH")
+app.title("Steganotron 3000")
+#app.tk.call("source", "Azure-ttk-theme-2.1.0/azure.tcl")
+#app.tk.call("set_theme", "light")
 app.geometry('600x700')
 bgcolor = 'pink'
 
@@ -210,13 +212,13 @@ message_label.place(x=220, y=480)
 # Confirmation
 confirm_lf = LabelFrame(app, bg=bgcolor)
 
-confirm_label = Label(confirm_lf, text=("File name already exists. Overwrite?"), bg=bgcolor, font=("Roboto", 15)) #print label
-confirm_label.place(x=210, y=20)
+confirm_label = Label(confirm_lf, bg=bgcolor, font=("Roboto", 15)) #print label
+confirm_label.place(x=150, y=30)
 
 confirm_yes_button = Button(confirm_lf, text="Yes", bg='white', fg='black', command=lambda:[print('Confirm yes'), confirm_lf.pack_forget(), encrypt_lf.pack(expand='yes', fill='both'), run_encryptor()])
-confirm_yes_button.place(x=210, y=100)
+confirm_yes_button.place(x=270, y=70)
 
 confirm_no_button = Button(confirm_lf, text="No", bg='white', fg='black', command=lambda:[print('Confirm no'), confirm_lf.pack_forget(), encrypt_lf.pack(expand='yes', fill='both')])
-confirm_no_button.place(x=310, y=100)
+confirm_no_button.place(x=310, y=70)
 
 app.mainloop()
