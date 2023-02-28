@@ -1,4 +1,4 @@
-from tkinter import Tk, Button, Label, filedialog, Text, WORD, LabelFrame, ttk
+from tkinter import Tk, Button, Label, filedialog, Text, WORD, LabelFrame
 from PIL import Image, ImageTk
 import numpy as np
 from os.path import isfile
@@ -23,11 +23,10 @@ def display_thumbnail():
     img = rdh.img
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = Image.fromarray(np.uint8(img))
-    img.thumbnail((300,300), Image.ANTIALIAS) #display image in GUI
+    img.thumbnail((250,250), Image.ANTIALIAS) #downscale image
     img = ImageTk.PhotoImage(img) #store image in render variable
-    img_label = Label(app, image=img) #image placement
+    img_label.configure(image=img)
     img_label.image = img
-    img_label.place(x=150, y=140)
     return
 
 def namechecker():
@@ -220,5 +219,9 @@ confirm_yes_button.place(x=270, y=70)
 
 confirm_no_button = Button(confirm_lf, text="No", bg='white', fg='black', command=lambda:[print('Confirm no'), confirm_lf.pack_forget(), encrypt_lf.pack(expand='yes', fill='both')])
 confirm_no_button.place(x=310, y=70)
+
+# image thumbnail
+img_label = Label(app, background=bgcolor, justify='center') #image placement
+img_label.place(x=210, y=140)
 
 app.mainloop()
