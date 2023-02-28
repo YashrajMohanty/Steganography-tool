@@ -160,13 +160,13 @@ app.title("Steganotron 3000")
 #app.tk.call("source", "Azure-ttk-theme-2.1.0/azure.tcl")
 #app.tk.call("set_theme", "light")
 app.geometry('600x700')
-bgcolor = 'pink'
+bgcolor = '#ffbb99'
 
 # Encrypt
 encrypt_lf = LabelFrame(app, bg=bgcolor)
 encrypt_lf.pack(expand='yes', fill='both')
 
-head_label = Label(encrypt_lf, text="Encryptor", bg=bgcolor, font=("Impact", 20))
+head_label = Label(encrypt_lf, text="Encryptor", bg=bgcolor, font=("Tahoma", 20))
 head_label.place(x=250, y=10)
 
 on_click_button = Button(encrypt_lf, text="Open Image", bg='white', fg='black', command=lambda:[open_img(), display_thumbnail()]) #button for on_click
@@ -193,7 +193,7 @@ gotodecrypt_button.place(x=310, y=70)
 # Decrypt
 decrypt_lf = LabelFrame(app, bg=bgcolor)
 
-head_label = Label(decrypt_lf, text="Decryptor", bg=bgcolor, font=("Impact", 20))
+head_label = Label(decrypt_lf, text="Decryptor", bg=bgcolor, font=("Tahoma", 20))
 head_label.place(x=250, y=10)
 
 decrypt_button = Button(decrypt_lf, text="Decrypt", bg='white', fg='black', command=lambda:display_decrypt_message(run_decryptor())) #button for decrypt
