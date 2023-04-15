@@ -10,6 +10,7 @@ img_savepath = 'Encrypted images\\'
 class rdh():
     img_path = ''
     img = None
+    validation_text = 'spur' # acts as a password embedded in the message
 
 def open_img():
     print('Open img')
@@ -78,7 +79,7 @@ def run_encryptor():
 
     picname = nametxt.get(1.0, "end-1c") # 1->Line 1, 0->Character 0, end->read till end of textbox, -1c->deletes one char (to avoid newline)
     data = txt.get(1.0, "end-1c") # 1->Line 1, 0->Character 0, end->read till end of textbox, -1c->deletes one char (to avoid newline)
-
+    data = rdh.validation_text + data # adds validation text before the message
     data = [format(ord(i), '08b') for i in data] #breakdown image data and convert to ASCII, ord->returns integer representing unicode character, format->formats specified values and insert them inside the string's placeholder
     #image encryption algorithm
     PixReq = len(data) * 3 #compute no. of pixels required (Length of ASCII array * 3)
@@ -146,13 +147,16 @@ def run_decryptor():
         message.append(data[i*8:(i*8+8)]) #letters stored in message variable
     message = [chr(int(''.join(i), 2)) for i in message] #join the letters to form message
     message = ''.join(message) #add space after word
-
     return message
 
 def display_decrypt_message(message):
     if message == None:
         return
-    message_label.configure(text=message)
+    if message[:len(rdh.validation_text)] == rdh.validation_text: # checks if the message starts with validation text
+        message = message[len(rdh.validation_text):] # removes validation text from message
+        message_label.configure(text=message)
+    else:
+        message_label.configure(text='Error! Image is not encrypted')
     return
 
 app = Tk()
